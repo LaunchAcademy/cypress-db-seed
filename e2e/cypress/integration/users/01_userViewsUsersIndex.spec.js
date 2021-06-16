@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-// import { makeFakeUser } from "../../../../server/src/db/factories/User"
 
 context("Users Index", () => {
   let persistedUser = null
