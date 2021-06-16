@@ -4,9 +4,14 @@ context("Users Index", () => {
   let persistedUser = null
   beforeEach(() => {
     cy.task("db:truncate", "User")
-    cy.request("POST", "api/v1/test/user", { firstName: "Tim Test" }).then(
-      (data) => (persistedUser = data.body)
-    )
+    cy.request("POST", "api/v1/test/user", { firstName: "Tim Test" }).then((data) => {
+      persistedUser = data.body
+      return persistedUser
+    })
+
+    cy.request("POST", "api/v1/test/user").then((data) => {
+      cy.request("DELETE", "api/v1/test/user", { conditions: { id: data.body.id } })
+    })
     cy.visit("/")
   })
 

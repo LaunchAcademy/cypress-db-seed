@@ -19,4 +19,13 @@ testRouter.post("/:entity", async (req, res) => {
   return res.status(200).json(result)
 })
 
+testRouter.delete("/:entity", async (req, res) => {
+  const { entity } = req.params
+  const { conditions } = req.body
+
+  const result = await models[_.upperFirst(entity)].query().delete().where(conditions)
+  await connection.client.pool.release()
+  return res.status(200).json(result)
+})
+
 export default testRouter
