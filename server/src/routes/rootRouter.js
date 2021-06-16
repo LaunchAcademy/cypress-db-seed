@@ -7,7 +7,7 @@ const rootRouter = new express.Router()
 
 rootRouter.use("/api/v1/users", usersRouter)
 
-if (process.env.NODE_ENV == "e2e") {
+if (process.env.NODE_ENV == "e2e" || process.env.NODE_ENV == "test") {
   rootRouter.use("/api/v1/test", testRouter)
 }
 
